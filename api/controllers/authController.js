@@ -34,7 +34,7 @@ export const signIn=async (req,res,next)=>{
             return next(errorHandler(401,'Invalid Credentials'))
         }
         const token=jwt.sign({id:validUser._id},process.env.JWT_SECRET);
-        console.log(token)
+        // console.log(token)
 //Nalla note pannu
         const expiryDate=new Date(Date.now() + 3600000);
         const sendingData=await User.findOne({email}).select('-password')

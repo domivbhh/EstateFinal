@@ -1,9 +1,10 @@
 import express from'express'
 const router=express.Router()
-import { signIn,signUp } from '../controllers/authController.js'
+import { signIn,signUp,google } from '../controllers/authController.js'
 
 router.post('/signup',signUp)
-router.post("/signin", signIn);
+router.post("/signin", signIn)
+router.post("/goggle",google)
 
 
 

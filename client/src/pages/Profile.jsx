@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux'
 import {getStorage, uploadBytesResumable,ref,getDownloadURL} from 'firebase/storage'
 import { app } from '../firebase'
 import {useDispatch} from 'react-redux'
-import { updateUserFailure,updateUserStart,updateUserSuccess,deleteUserFailure,deleteUserStart,deleteUserSuccess } from '../redux/user/userSlice'
+import { updateUserFailure,updateUserStart,updateUserSuccess,deleteUserFailure,deleteUserStart,deleteUserSuccess,signOut } from '../redux/user/userSlice'
 
 
 const Profile = () => {
@@ -105,6 +105,16 @@ const Profile = () => {
     }
   }
 
+  const handleSignOut=async()=>{
+    try{
+      await fetch('/api/auth/signout')
+      dispatch(signOut())
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
+
   
   return (
     <div className='p-3 max-w-lg mx-auto'>
@@ -127,7 +137,7 @@ const Profile = () => {
     </form>      
     <div className='flex justify-between mt-5'>
       <span className='text-red-700 cursor-pointer' onClick={handleDelete}>Delete</span>
-      <span className='text-red-700 cursor-pointer'>Sign out</span>
+      <span className='text-red-700 cursor-pointer' onClick={handleSignOut}>Sign out</span>
     </div>
     <p className='text-red-700 mt-5'>{error && 'Something went Wrong'}</p>
     <p className='text-green-700 mt-5'>{updateSuccess && 'User updated successfully'}</p>

@@ -42,6 +42,7 @@ export default function Signin() {
       }
 
       dispatch(signInSuccess(data));
+      navigate('/')
          
       
 

@@ -32,6 +32,7 @@ const Signup = () => {
           
       const data=await res.json()
       setLoading(false)
+      navigate('/signin')
       
       
       if(data.success===false){
@@ -39,8 +40,7 @@ const Signup = () => {
          return
         }
 
-         setError(false);
-         navigate('/signin')
+      setError(false);
     
       }
     catch(err){

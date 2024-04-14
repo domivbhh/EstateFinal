@@ -14,15 +14,17 @@ export const updateUser = async (req, res,next) => {
     if(req.body.password){
       req.body.password=bcryptjs.hashSync(req.body.password,10);
     }
-    const updatedUser=await User.findByIdAndUpdate(
-      req.params.id,{
-        $set:{
-          username:req.body.username,
-          password:req.body.password,
-          profilePicture:req.body.profilePicture,
-        }    
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          username: req.body.username,
+          email: req.body.email,
+          password: req.body.password,
+          profilePicture: req.body.profilePicture,
         },
-        {new:true}
+      },
+      { new: true }
     );
       // console.log(updateUser)
       const sendingData=await User.findById(req.params.id).select('-password')

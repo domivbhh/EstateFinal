@@ -55,7 +55,7 @@ const Profile = () => {
     setFormData({...formData,[e.target.id]:e.target.value})
   }
 
-  // console.log(formData)
+  console.log(formData)
 
   const handleSubmit=async (e)=>{
       e.preventDefault()
@@ -117,32 +117,81 @@ const Profile = () => {
 
   
   return (
-    <div className='p-3 max-w-lg mx-auto'>
-    <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
-    <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-      <input type="file" ref={fileRef} hidden accept='image/*' onChange={(e)=>setImage(e.target.files[0])} />
+    <div className="p-3 max-w-lg mx-auto">
+      <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <input
+          type="file"
+          ref={fileRef}
+          hidden
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files[0])}
+        />
 
-      <img src={formData.profilePicture || user.currentUser.profilePicture} alt="profile"  className='h-24 w-24 self-center cursor-pointer rounded-full object-cover mt-2' onClick={()=>fileRef.current.click()}/>
-      <p className='text-sm self-center'>{imageError ? (<span className='text-red-500'>Error Uploading Image(File size must be less than 2MB)</span>) : imagePercent>0 && imagePercent <100 ? (<span className='text-slate-700'>{`Uploading :${imagePercent} %`}</span>):imagePercent===100 ? (<span className='text-green-700'>Image Uploaded</span>):('')}
+        <img
+          src={formData.profilePicture || user.currentUser.profilePicture}
+          alt="profile"
+          className="h-24 w-24 self-center cursor-pointer rounded-full object-cover mt-2"
+          onClick={() => fileRef.current.click()}
+        />
+        <p className="text-sm self-center">
+          {imageError ? (
+            <span className="text-red-500">
+              Error Uploading Image(File size must be less than 2MB)
+            </span>
+          ) : imagePercent > 0 && imagePercent < 100 ? (
+            <span className="text-slate-700">{`Uploading :${imagePercent} %`}</span>
+          ) : imagePercent === 100 ? (
+            <span className="text-green-700">Image Uploaded</span>
+          ) : (
+            ""
+          )}
         </p>
-      
-      <input defaultValue={user.currentUser.username} type="text" id='username' placeholder='username' className='bg-slate-100 rounded-lg p-3' onChange={handleChange}/>
-      
-      <input defaultValue={user.currentUser.email} type="text" id='email' placeholder='email' className='bg-slate-100 rounded-lg p-3' />
-      
-      <input type="text" id='password' placeholder='password' className='bg-slate-100 rounded-lg p-3' />
-      
-      <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>Update</button>
-    
-    </form>      
-    <div className='flex justify-between mt-5'>
-      <span className='text-red-700 cursor-pointer' onClick={handleDelete}>Delete</span>
-      <span className='text-red-700 cursor-pointer' onClick={handleSignOut}>Sign out</span>
+
+        <input
+          defaultValue={user.currentUser.username}
+          type="text"
+          id="username"
+          placeholder="username"
+          className="bg-slate-100 rounded-lg p-3"
+          onChange={handleChange}
+        />
+
+        <input
+          defaultValue={user.currentUser.email}
+          type="text"
+          id="email"
+          placeholder="email"
+          className="bg-slate-100 rounded-lg p-3"
+          onChange={handleChange}
+        />
+
+        <input
+          type="text"
+          id="password"
+          placeholder="password"
+          className="bg-slate-100 rounded-lg p-3"
+          onChange={handleChange}
+        />
+
+        <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
+          Update
+        </button>
+      </form>
+      <div className="flex justify-between mt-5">
+        <span className="text-red-700 cursor-pointer" onClick={handleDelete}>
+          Delete
+        </span>
+        <span className="text-red-700 cursor-pointer" onClick={handleSignOut}>
+          Sign out
+        </span>
+      </div>
+      <p className="text-red-700 mt-5">{error && "Something went Wrong"}</p>
+      <p className="text-green-700 mt-5">
+        {updateSuccess && "User updated successfully"}
+      </p>
     </div>
-    <p className='text-red-700 mt-5'>{error && 'Something went Wrong'}</p>
-    <p className='text-green-700 mt-5'>{updateSuccess && 'User updated successfully'}</p>
-    </div>
-  )
+  );
 }
 
 export default Profile

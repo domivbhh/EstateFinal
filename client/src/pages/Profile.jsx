@@ -4,6 +4,7 @@ import {getStorage, uploadBytesResumable,ref,getDownloadURL} from 'firebase/stor
 import { app } from '../firebase'
 import {useDispatch} from 'react-redux'
 import { updateUserFailure,updateUserStart,updateUserSuccess,deleteUserFailure,deleteUserStart,deleteUserSuccess,signOut } from '../redux/user/userSlice'
+import {Link} from 'react-router-dom';
 
 
 const Profile = () => {
@@ -177,6 +178,9 @@ const Profile = () => {
         <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
           Update
         </button>
+        <Link to='/create-listing' className='bg-green-500 text-white p-3 rounded-lg uppercase text-center hover:opacity-85'>
+          Create listing
+        </Link>
       </form>
       <div className="flex justify-between mt-5">
         <span className="text-red-700 cursor-pointer" onClick={handleDelete}>

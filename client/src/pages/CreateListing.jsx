@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {getDownloadURL, getStorage, uploadBytesResumable,ref} from 'firebase/storage'
-import {app} from '../firebase/firebase.js'
+import {app} from '../firebase.js'
 import {useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 
@@ -12,6 +12,7 @@ const [loading,setLoading]=useState(false)
 const {currentUser}=useSelector(state => state.user)
 
 const[files,setFiles]=useState([])
+// console.log(files)
 const[formData,setFormData]=useState({
   imageUrls:[],
   name:'',
@@ -26,6 +27,8 @@ const[formData,setFormData]=useState({
   parking:false,
   furnished:false
 })
+
+console.log(formData.imageUrls)
 
 const handleChange=(e)=>{
   if(e.target.id==='sale' || e.target.id==='rent'){
@@ -55,7 +58,7 @@ const handleChange=(e)=>{
 const[imageUploadError,setImageUploadError]=useState(false)
 const[uploading,setUploading]=useState(false)
 
-console.log(currentUser)
+// console.log(currentUser)
 
  const handleRemoveImage = (index) => {
         setFormData({

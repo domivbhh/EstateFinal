@@ -137,6 +137,7 @@ const handleImageSubmit=(e)=>{
         body:JSON.stringify({...formData,userRef:currentUser._id}),
       });
       const data=await res.json()
+      console.log(data)
       setLoading(false)
       if(data.success===false){
         setError(data.message);
@@ -290,7 +291,7 @@ const handleImageSubmit=(e)=>{
                 type="Number"
                 id="discountedprice"
                 min="0"
-                max="100000000000"
+                max="1000000"
                 required
                 className="p-3 border border-gray-300 rounded-lg"
                 onChange={handleChange}
@@ -353,7 +354,7 @@ const handleImageSubmit=(e)=>{
             ))}
 
           <button disabled={loading || uploading} className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
-            {loading ? 'loading' : 'Create Listing'}
+            {loading ? 'Creating...' : 'Create Listing'}
           </button>
           {error && <p className='text-red-700 text-sm'>{error}</p>}
         </div>
